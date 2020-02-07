@@ -18,8 +18,13 @@
 
 
 def verbing(s):
-    """Your code goes here.  Edit this docstring."""
-    return
+    if len(s) >= 3 and s.endswith('ing'):
+        s = s + 'ly'
+    elif len(s) >= 3:
+        s = s + 'ing'
+    else:
+        s = s
+    return s
 
 
 # E. not_bad
@@ -31,9 +36,37 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    """Your code goes here.  Edit this docstring."""
-    return
-
+    result_string = s
+    s = s.split()
+    if 'bad' in s:
+        bad_index = s.index('bad')
+        not_index = s.index('not')
+        if bad_index > not_index:
+            s_start = s[0:not_index]
+            s_end = s[bad_index + 1:]
+            s_start.append('good')
+            s_start = ' '.join(s_start)
+            s_end = ' '.join(s_end)
+            result_string = s_start + s_end
+            return result_string
+        else:
+            return result_string
+    elif 'bad!' in s:
+        bad_bang_index = s.index('bad!')
+        not_index = s.index('not')
+        if bad_bang_index > not_index:
+            s_start = s[0:not_index]
+            s_end = s[bad_bang_index + 1:]
+            s_start.append('good!')
+            s_start = ' '.join(s_start)
+            s_end = ' '.join(s_end)
+            result_string = s_start + s_end
+            return result_string
+        else:
+            return result_string
+    else:
+        return result_string
+        
 
 # F. front_back
 # Consider dividing a string into two halves.
@@ -42,13 +75,44 @@ def not_bad(s):
 # e.g. 'abcde', the front half is 'abc', the back half 'de'.
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
+
+
 def front_back(a, b):
-    """Your code goes here.  Edit this docstring."""
-    return
+    result_string = ''
+    if len(a) % 2 == 0 and len(b) % 2 == 0:
+        a_front = a[0:(len(a)/2)]
+        a_back = a[(len(a)/2):]
+        b_front = b[0:(len(b)/2)]
+        b_back = b[(len(b)/2):]
+        result_string = a_front + b_front + a_back + b_back
+        return result_string
+    elif len(a) % 2 == 1 and len(b) % 2 == 1:
+        a_front = a[0:(len(a)/2 + 1)]
+        a_back = a[(len(a)/2 + 1):]
+        b_front = b[0:(len(b)/2 + 1)]
+        b_back = b[(len(b)/2 + 1):]
+        result_string = a_front + b_front + a_back + b_back
+        return result_string
+    elif len(a) % 2 == 0 and len(b) % 2 == 1:
+        a_front = a[0:(len(a)/2)]
+        a_back = a[(len(a)/2):]
+        b_front = b[0:(len(b)/2 + 1)]
+        b_back = b[(len(b)/2 + 1):]
+        result_string = a_front + b_front + a_back + b_back
+        return result_string
+    elif len(a) % 2 == 1 and len(b) % 2 == 0:
+        a_front = a[0:(len(a)/2 + 1)]
+        a_back = a[(len(a)/2 + 1):]
+        b_front = b[0:(len(b)/2)]
+        b_back = b[(len(b)/2):]
+        result_string = a_front + b_front + a_back + b_back
+        return result_string
 
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
+
+
 def test(got, expected):
     """Your code goes here.  Edit this docstring."""
     if got == expected:
